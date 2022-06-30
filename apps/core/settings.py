@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.linkedin',
     # 'allauth.socialaccount.providers.linkedin_oauth2',
     # 'allauth.socialaccount.providers.twitter',
-    'meeting.apps.MeetingConfig',
     'django_extensions',
     'crispy_forms',
 ]
