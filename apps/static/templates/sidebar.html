@@ -1,13 +1,20 @@
 <!-- Create the sidebar for when user is logged in -->
 <div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col nav-justify-content">
-            <!-- All the sidebar content goes here -->
-            Sidebar Content
+    <div class="row justify-content-left">
+        {% block sidebar %}
+        <div class="col-md-3 col-sm-4 text-center">
+            <!-- This is where the sidebar will be placed -->
+
         </div>
+        {% endblock %}
+
+        {% block content %}
         <div class="col justify-content-center">
-            <!-- All the rest of the page content goes here in this row -->
-            Regular content goes here
+            <div class="col-md-8 col-sm-10 text-center">
+                <!-- This is where the page content will be placed -->
+
+            </div>
         </div>
+        {% endblock %}
     </div>
 </div>
