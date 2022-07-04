@@ -1,12 +1,33 @@
 from email.mime import image
 from django.db import models
-from django.contrib.auth.models import User
+from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.template.defaultfilters import slugify
 from django.db.models.signals import post_save
 from distutils.command.upload import upload
 from django.dispatch import receiver
 from requests import post
 from django.conf import settings
+
+# Create a NewUser class to create a custom user model. I am going to create a new user model that 
+# has more base fields than the Base Django User class
+class NewUser(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(_('user email address field'), unique=True)
+    username = models.CharField(max_length=120, unique=True)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    about = models.TextField(_('about'), max_length=500, blank=True)
+    start_date = models.DateTimeField(default=timezone.now)
+    is_staff = models.BooleanField(_('is user staff'), default=False)
+    is_activ = models.BooleanField(default=False)
+    pass
+
+
+# Create a Custom user manager class. This will hold the methods for creating and saving the 
+# new user models. I can also add in verifications and custom model behavior.
+class CustomAccountManager(BaseUserManager):
+    pass
 
 # Portfolio Model: This is essentially the users' profile. Each user will have
 # only one portfolio. Inside that portfolio they can add as many projects as
